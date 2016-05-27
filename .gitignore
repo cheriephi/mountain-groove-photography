@@ -1,0 +1,4 @@
+platforms/*
+!platforms/ReadMe.md
+plugins/*
+!plugins/ReadMe.md

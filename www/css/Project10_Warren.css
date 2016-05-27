@@ -1,0 +1,31 @@
+/* Ensure images grow up to their limit of the screen width */
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+
+/* Use the same font as the originating web site */
+
+@font-face {
+    font-family: Aclonica;
+    src: url('../font/Aclonica.ttf');
+}
+
+h1 {
+    font-family: Aclonica;
+    font-variant: small-caps;
+    font-size: 3em !important;
+    /* Use the green from the theme for the header; otherwise it would be gray */
+    background-color: #8cc63f !important;
+}
+
+
+/* Make the header wrap if it is too wide */
+
+.ui-header .ui-title {
+    overflow: visible !important;
+    white-space: normal !important;
+    margin: 0;
+}
