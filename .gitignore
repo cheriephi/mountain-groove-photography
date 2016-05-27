@@ -2,3 +2,5 @@ platforms/*
 !platforms/ReadMe.md
 plugins/*
 !plugins/ReadMe.md
+
+www/js/smugMugAPIKey.js
