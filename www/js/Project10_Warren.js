@@ -1,5 +1,6 @@
 var feeds = [];
 window.onload = function () {
+    refreshNodes();
     // At this point, the document has loaded but phonegap-1.0.0.js has not.
     // When PhoneGap is loaded and talking with the native device,
     // it will call the event `deviceready`.
@@ -19,6 +20,17 @@ function onDeviceReady() {
         document.body.style.marginTop = "20px";
     }
 
+}
+
+function updateRootNodeList(nodes) {
+    var rootNodeContentHtml = '';
+    for (i = 0; i < nodes.length; i++) {
+        rootNodeContentHtml += '<div data-role="collapsible"><h2>' + nodes[i].Name + '</h2></div>';
+    }
+
+    var rootNodeContent = $('#rootNodeList');
+    rootNodeContent.empty();
+    rootNodeContent.append(rootNodeContentHtml);
 }
 
 function getFeed(myID, galleryID) {

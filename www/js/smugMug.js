@@ -1,14 +1,16 @@
 var myAPIKey;
 
 jQuery(document).ready(function ($) {
-    getSmugMug();
+   // getSmugMug();
 });
 
 function getSmugMug() {
     myAPIKey = getAPIKey();
     getUser();
     getAlbums(1, 3);
-	getAlbumImages("LDS2fC");
+    getNode("tmjJd");
+	getNode(rootNode);
+    getAlbumImages("LDS2fC");
 }
 
 function log (message) {
@@ -69,9 +71,32 @@ function getAlbums(start, count) {
     });
 }
 
+function refreshNodes() {
+    log("refreshNodes start");
+
+    myAPIKey = getAPIKey();
+    var x = getData("http://www.smugmug.com/api/v2/node/bWK57!children");
+
+    $.when(x).then(function (data) {
+        var childNodes = [];
+        for (i = 0; i < data.Response.Node.length; i++) {
+            var childNode = {
+                Name: data.Response.Node[i].Name,
+                NodeID: data.Response.Node[i].NodeID
+            }
+            childNodes.push(childNode);
+        }
+        updateRootNodeList(childNodes);
+        log("refreshNodes callback end");
+    });
+    
+    log("refreshNodes end");
+}
+
 function getNode(nodeID) {
     log("getNode(" + nodeID + ") start");
 
+    //HighlightImage Uri: "/api/v2/highlight/node/bWK57"
     var x = getData("http://www.smugmug.com/api/v2/node/" + nodeID);
 
     $.when(x).then(function (data) {
@@ -105,8 +130,6 @@ function getAlbumImages(albumKey) {
             if (i == 1) {break; }
         }
         
-//var albumstring = '{"description": "' + albumImageData.Response.Album.Description + '"}';
-//var album = JSON.parse(albumstring);
 
         log("getAlbumImages end");
     });

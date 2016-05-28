@@ -42,9 +42,6 @@
             <!-- Demonstrate that we can do device specific logic at the appropriate time -->
             <p id="deviceReadyWelcome"></p>
             <br>
-            <ul data-role="listview" id="feedList">
-            </ul>
-
             <div data-role="collapsible-set">
                 <div data-role="collapsible">
                     <h2>Outdoor Images</h2>
@@ -104,6 +101,24 @@
         <div data-role="footer" data-position="fixed">
             <div class="footer-nav" data-role="navbar">
                 <ul>
+                    <li><a href="#smugMug" data-icon="info">Smug Mug</a></li>
+                    <li><a href="#about" data-icon="info">About</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div data-role="page" id="smugMug" data-theme="a">
+        <div data-role="header">
+            <h1>Mountain Groove Photography</h1>
+        </div>
+        <div role="main" class="ui-content" id="detailContent">
+            <div id="rootNodeList" data-role="collapsible-set">
+            </div>
+        </div>
+        <div data-role="footer" data-position="fixed">
+            <div class="footer-nav" data-role="navbar">
+                <ul>
+                    <li><a href="#home" data-icon="home">Home</a></li>
                     <li><a href="#about" data-icon="info">About</a></li>
                 </ul>
             </div>
