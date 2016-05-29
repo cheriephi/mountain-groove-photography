@@ -27,10 +27,11 @@ var getData = function(dataUrl) {
         url: dataUrl
     })
     .fail(function(jqXHR, textStatus, errorThrown) {
-        console.log(textStatus + ': ' + errorThrown);
+        log(textStatus + ': ' + errorThrown);
     })
-    .always(function() {
-        console.log("getData end");
+    .always(function(a, textStatus, b) {
+        console.dir(a);
+        log("getData end");
     })
     ;
 };
@@ -75,17 +76,30 @@ function refreshNodes() {
     log("refreshNodes start");
 
     myAPIKey = getAPIKey();
-    var x = getData("http://www.smugmug.com/api/v2/node/bWK57!children");
-
+    var x = getData("http://www.smugmug.com/api/v2/node/bWK57!children?_expand=ChildNodes");
+    
     $.when(x).then(function (data) {
         var childNodes = [];
         for (i = 0; i < data.Response.Node.length; i++) {
             var childNode = {
                 Name: data.Response.Node[i].Name,
                 NodeID: data.Response.Node[i].NodeID
-            }
+            };
+
+            var grandChildNodes = [];
+            var grandChildExpansion = data.Expansions["/api/v2/node/" + childNode.NodeID + "!children"].Node;
+            for (j = 0; j < grandChildExpansion.length; j++) {
+                var grandChildNode = {
+                    Name: grandChildExpansion[j].Name,
+                    NodeID: grandChildExpansion[j].NodeID
+                };
+                grandChildNodes.push(grandChildNode);
+            };
+            
+            childNode.ChildNodes = grandChildNodes;
             childNodes.push(childNode);
         }
+     
         updateRootNodeList(childNodes);
         log("refreshNodes callback end");
     });

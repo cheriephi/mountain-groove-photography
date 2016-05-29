@@ -25,7 +25,15 @@ function onDeviceReady() {
 function updateRootNodeList(nodes) {
     var rootNodeContentHtml = '';
     for (i = 0; i < nodes.length; i++) {
-        rootNodeContentHtml += '<div data-role="collapsible"><h2>' + nodes[i].Name + '</h2></div>';
+        rootNodeContentHtml += '<div data-role="collapsible"><h2>' + nodes[i].Name + '</h2>'
+        rootNodeContentHtml += '<div data-role="collapsible-set">';
+
+        for (j = 0; j < nodes[i].ChildNodes.length; j++) {
+            rootNodeContentHtml += '<div data-role="collapsible"><h2>' + nodes[i].ChildNodes[j].Name + '</h2></div>';
+        }
+
+        rootNodeContentHtml += '</div>';
+        rootNodeContentHtml += '</div>';
     }
 
     var rootNodeContent = $('#rootNodeList');
