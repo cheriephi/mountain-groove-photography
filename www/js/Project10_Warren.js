@@ -1,6 +1,6 @@
 var feeds = [];
 window.onload = function () {
-    refreshNodes();
+    getNodes();
     // At this point, the document has loaded but phonegap-1.0.0.js has not.
     // When PhoneGap is loaded and talking with the native device,
     // it will call the event `deviceready`.
