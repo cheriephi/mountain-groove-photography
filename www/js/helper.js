@@ -1,43 +1,49 @@
-function log(message) {
+function log(message, data) {
     console.log(new Date().toString() + ":" + message);
+    if (typeof data === "object") {
+        console.dir(data);
+        //JSON.stringify(data);
+    }
 }
 
-//Replace the input url with a mock one
-function mockUrl(url) {
-    var newUrl = url;
+function getAJAXSettings(url) {
+    //Configure mocks
+    var useMockData = true;
+    var limitResultCount = true;
 
-    if (true) {
-        var pattern = /count%22%3A\d+%/g;
-        newUrl = url.replace(pattern, "count%22%3A" + 4 + "%");
-        log("mockUrl: " + newUrl);
+    //Main logic
+    var settings = {
+        data: {
+            Accept: 'application/json'
+        },
+        dataType: 'json'
     }
 
-    if (false) {
-        //Repoint SmugMug
+    if (useMockData) {
+        //Use a local mock file rather than the live SmugMug API
         pattern = /SmugMug/ig;
         if (pattern.test(url)) {
-            newUrl = 'data/mockSmugMugNodesSmall.json';
+            settings.url = 'data/mockSmugMugNodesSmall.json';
         }
-        log("mockUrl: " + newUrl);
+    } else {
+        if (limitResultCount) {
+            var pattern = /count%22%3A\d+%/g;
+            var newUrl = url.replace(pattern, "count%22%3A" + 4 + "%");
+            settings.url = newUrl;
+        }
+
+        var myAPIKey = getAPIKey();
+        settings.data.APIKey = myAPIKey;
     }
 
-    return newUrl;
+    log("getAJAXSettings: " + url, settings);
+    return settings;
 }
 
 function getData(url) {
-    log("getData: " + url);
+    var settings = getAJAXSettings(url);
 
-    var myAPIKey = getAPIKey();
-    var dataUrl = mockUrl(url);
-
-    return $.ajax({
-            data: {
-                APIKey: myAPIKey,
-                Accept: 'application/json',
-            },
-            dataType: 'json',
-            url: dataUrl
-        })
+    return $.ajax(settings)
         .fail(function (jqXHR, textStatus, errorThrown) {
             var errorMessage = 'getData textStatus: ' + textStatus;
             errorMessage += '. jqXHR.status: ' + jqXHR.status;
@@ -45,11 +51,8 @@ function getData(url) {
                 errorMessage += ". The requested page not found.";
             }
             log(errorMessage);
-
         })
         .always(function (data, textStatus, b) {
-            //console.dir(data);
-            //console.log(JSON.stringify(data));
-            //log("getData end");
+            //log("getData" + url, data);
         });
 }
