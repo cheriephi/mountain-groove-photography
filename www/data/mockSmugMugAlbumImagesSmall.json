@@ -1,0 +1,21 @@
+{
+    "Response": {
+        "Uri": "/api/v2/album/JpLx6F!images",
+        "AlbumImage": [{
+            "WebUri": "https://mountaingroovephotography.smugmug.com/Adventures/2015-Outdoor-Outings/Potholes-State-Park/i-6nwdfT3",
+            "Caption": "Sometimes an image has a caption",
+            "ThumbnailUrl": "https://photos.smugmug.com/Adventures/2015-Outdoor-Outings/Potholes-State-Park/i-6nwdfT3/0/Th/MJW_5861-copy-Th.jpg",
+            "Date": "2015-10-17T04:13:46+00:00"
+        }, {
+            "WebUri": "https://mountaingroovephotography.smugmug.com/Adventures/2015-Outdoor-Outings/Potholes-State-Park/i-Mwrc2W5",
+            "Caption": "",
+            "ThumbnailUrl": "https://photos.smugmug.com/Adventures/2015-Outdoor-Outings/Potholes-State-Park/i-Mwrc2W5/0/Th/MJW_5864-copy-Th.jpg",
+            "Date": "2015-10-17T04:13:46+00:00"
+        }, {
+            "WebUri": "https://mountaingroovephotography.smugmug.com/Adventures/2015-Outdoor-Outings/Potholes-State-Park/i-HXQg6gJ",
+            "Caption": "",
+            "ThumbnailUrl": "https://photos.smugmug.com/Adventures/2015-Outdoor-Outings/Potholes-State-Park/i-HXQg6gJ/0/Th/MJW_5874-copy-Th.jpg",
+            "Date": "2015-10-17T04:13:50+00:00"
+        }]
+    }
+}
