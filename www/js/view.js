@@ -26,7 +26,7 @@ function createList(nodes, html) {
             innerHtml += '</li>';
         } else {
             innerHtml = '<li data-role="collapsible">';
-            innerHtml += '<h2 id="' + nodes[i].NodeID + '" onclick="getAlbumImages(this.id)">' + nodes[i].Name + '</h2>';
+            innerHtml += '<h2 id="' + nodes[i].NodeID + '" onclick="getNodeImages(this.id)">' + nodes[i].Name + '</h2>';
             innerHtml += '</li>';
         }
 
@@ -40,15 +40,16 @@ function createList(nodes, html) {
     return html;
 }
 
-function refreshAlbumImageList(albumImages) {
+function refreshAlbumImageList(nodeID, albumImages) {
     var html = '';
     for (var i = 0; i < albumImages.length; i++) {
         var listLink = '<li><img src="' + albumImages[i].ThumbnailUrl + '" alt="Image">' + albumImages[i].Caption + '</a></li>';
         html += listLink;
     }
 
-    var stage = $("#vgsXkq"); // todo
+    var stage = $("#" + nodeID);
     stage.empty();
     stage.append(html);
+    //log("refreshAlbumImageList " + nodeID, albumImages);
     //log(html);
 }

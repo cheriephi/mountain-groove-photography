@@ -33,16 +33,28 @@ function getChildNodes(expansions, nodeID) {
 }
 
 function processAlbumImages(data) {
+    //Get the first key in the Expansions
+    for (var key in data.Expansions) {
+        break;
+    }
+
+    if (!data.Expansions[key].AlbumImage) {
+        return;
+    }
+
+    var nodeID = data.Response.Node.NodeID;
+
     var albumImages = [];
-    for (var i = 0; i < data.Response.AlbumImage.length; i++) {
+    for (var i = 0; i < data.Expansions[key].AlbumImage.length; i++) {
         var albumImage = {
-            Caption: data.Response.AlbumImage[i].Caption,
-            Date: data.Response.AlbumImage[i].Date,
-            ThumbnailUrl: data.Response.AlbumImage[i].ThumbnailUrl,
-            WebUri: data.Response.AlbumImage[i].WebUri
+            Caption: data.Expansions[key].AlbumImage[i].Caption,
+            Date: data.Expansions[key].AlbumImage[i].Date,
+            ThumbnailUrl: data.Expansions[key].AlbumImage[i].ThumbnailUrl,
+            WebUri: data.Expansions[key].AlbumImage[i].WebUri
         }
         albumImages.push(albumImage);
     }
 
-    refreshAlbumImageList(albumImages);
+    log("processAlbumImages " + nodeID, albumImages);
+    refreshAlbumImageList(nodeID, albumImages);
 }

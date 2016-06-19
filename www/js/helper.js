@@ -8,14 +8,12 @@ function log(message, data) {
 
 function getAJAXSettings(url) {
     //Configure mocks
-    var useMockData = true;
+    var useMockData = false;
     var limitResultCount = true;
 
     //Main logic
     var settings = {
-        data: {
-            Accept: 'application/json'
-        },
+        data: {},
         dataType: 'json'
     }
     var myAPIKey = getAPIKey();

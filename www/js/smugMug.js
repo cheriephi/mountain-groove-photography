@@ -1,13 +1,26 @@
-function getAlbumImages(albumKey) {
+function getNodeImages(NodeID) {
     var filter = {
-        filter: ["Caption", "Date", "ThumbnailUrl", "WebUri"],
-        filteruri: []
-    }
+        filter: ["NodeID"],
+        filteruri: ["Album"],
+        expand: {
+            "Album": {
+                filter: [],
+                filteruri: ["AlbumImages"],
+                expand: {
+                    "AlbumImages": {
+                        filter: ["Caption", "Date", "ThumbnailUrl", "WebUri"],
+                        filteruri: [],
+                        "args": {
+                            "count": 100
+                        }
+                    }
+                }
+            }
+        }
+    };
 
     var filterString = encodeURIComponent(JSON.stringify(filter));
-    // TODO. Need to associate the album with the node
-    //http://www.smugmug.com/api/v2/node/vgsXkq
-    var url = "http://www.smugmug.com/api/v2/album/JpLx6F!images?_config=" + filterString;
+    var url = "http://www.smugmug.com/api/v2/node/" + NodeID + "?_config=" + filterString;
 
     getData(url, processAlbumImages);
 }
